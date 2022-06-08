@@ -12,8 +12,8 @@ namespace HmsPlugin
 {
     public class HMSGameServiceSettingsDrawer : VerticalSequenceDrawer
     {
-        private Settings _leaderboardSettings;
-        private Settings _achievementsSettings;
+        private HMSSettings _leaderboardSettings;
+        private HMSSettings _achievementsSettings;
 
         private Foldout _leaderboardFoldout = new Foldout("Leaderboard List");
         private Foldout _achievementsFoldout = new Foldout("Achievements List");
@@ -102,6 +102,7 @@ namespace HmsPlugin
                     }
                     file.WriteLine("}");
                 }
+                AssetDatabase.Refresh();
             }
         }
 

@@ -14,36 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     _keys:
-    - AdsKitEnabled
-    - RemoteConfigEnabled
-    - IAPKitEnabled
-    - GameServiceEnabled
-    - AnalyticsKit
-    - Auth
-    - AccountKit
+    - AppCompat
     - AdsKit
+    - AccountKit
     - GameService
     - PushKit
+    - AnalyticsKit
+    - Auth
     - IAPKit
     - RemoteConfig
     - CrashKit
     - CloudDB
-    - DriveKit
     - NearbyService
     - AppMessaging
     _values:
-    - False
-    - False
-    - False
-    - False
-    - False
-    - False
+    - True
     - True
     - True
     - True
     - False
-    - True
     - False
+    - False
+    - True
     - False
     - False
     - False

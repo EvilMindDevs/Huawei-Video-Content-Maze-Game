@@ -6,14 +6,6 @@ ScriptsOnlyBuild:
     - Cube
     - GameMenu
     - GameOverMenu
-    - HMSAdsKitManager
-    - HmsPlugin.HMSAccountManager
-    - HmsPlugin.HMSAchievementsManager
-    - HmsPlugin.HMSGameManager
-    - HmsPlugin.HMSIAPManager
-    - HmsPlugin.HMSLeaderboardManager
-    - HmsPlugin.HMSSaveGameManager
-    - HmsPlugin.SettingsScriptableObject
     - InputManager
     - MainMenu
     - MazeGameManager
@@ -22,6 +14,8 @@ ScriptsOnlyBuild:
     - PlayerController
     - SafeArea
     - Tile
+    HuaweiMobileServices.Core.dll:
+    - HmsPlugin.SettingsScriptableObject
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -32,6 +26,9 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.DeviceSimulator.Editor.dll:
     - Unity.DeviceSimulator.SimulatorWindow
+    Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatConsoleWindow
+    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -85,77 +82,63 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11266}
+      Script: {instanceID: 11350}
     - Class: 114
-      Script: {instanceID: 11268}
+      Script: {instanceID: 11794}
     - Class: 114
-      Script: {instanceID: 11272}
+      Script: {instanceID: 12360}
     - Class: 114
-      Script: {instanceID: 11292}
+      Script: {instanceID: 12682}
     - Class: 114
-      Script: {instanceID: 11322}
+      Script: {instanceID: 13082}
     - Class: 114
-      Script: {instanceID: 11770}
+      Script: {instanceID: 13098}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 13178}
     - Class: 114
-      Script: {instanceID: 12052}
+      Script: {instanceID: 13534}
     - Class: 114
-      Script: {instanceID: 12262}
+      Script: {instanceID: 13976}
     - Class: 114
-      Script: {instanceID: 12398}
-    - Class: 114
-      Script: {instanceID: 12410}
-    - Class: 114
-      Script: {instanceID: 12468}
-    - Class: 114
-      Script: {instanceID: 12594}
-    - Class: 114
-      Script: {instanceID: 12698}
-    - Class: 114
-      Script: {instanceID: 12766}
-    - Class: 114
-      Script: {instanceID: 13112}
-    - Class: 114
-      Script: {instanceID: 13126}
-    - Class: 114
-      Script: {instanceID: 13382}
-    - Class: 114
-      Script: {instanceID: 13450}
-    - Class: 114
-      Script: {instanceID: 13610}
-    - Class: 114
-      Script: {instanceID: 13632}
-    - Class: 114
-      Script: {instanceID: 13662}
-    - Class: 114
-      Script: {instanceID: 13926}
-    - Class: 114
-      Script: {instanceID: 13984}
-    - Class: 114
-      Script: {instanceID: 14100}
+      Script: {instanceID: 13996}
     - Class: 114
       Script: {instanceID: 14126}
     - Class: 114
-      Script: {instanceID: 14156}
+      Script: {instanceID: 14334}
     - Class: 114
-      Script: {instanceID: 14266}
+      Script: {instanceID: 14418}
     - Class: 114
-      Script: {instanceID: 14420}
+      Script: {instanceID: 14610}
     - Class: 114
-      Script: {instanceID: 14486}
+      Script: {instanceID: 14636}
     - Class: 114
-      Script: {instanceID: 14524}
+      Script: {instanceID: 14672}
     - Class: 114
-      Script: {instanceID: 14552}
+      Script: {instanceID: 15004}
     - Class: 114
-      Script: {instanceID: 14620}
+      Script: {instanceID: 15072}
     - Class: 114
-      Script: {instanceID: 14748}
+      Script: {instanceID: 15212}
     - Class: 114
-      Script: {instanceID: 14826}
+      Script: {instanceID: 15246}
     - Class: 114
-      Script: {instanceID: 15914}
+      Script: {instanceID: 15280}
+    - Class: 114
+      Script: {instanceID: 15408}
+    - Class: 114
+      Script: {instanceID: 15600}
+    - Class: 114
+      Script: {instanceID: 15678}
+    - Class: 114
+      Script: {instanceID: 15726}
+    - Class: 114
+      Script: {instanceID: 15764}
+    - Class: 114
+      Script: {instanceID: 15848}
+    - Class: 114
+      Script: {instanceID: 16102}
+    - Class: 114
+      Script: {instanceID: 18288}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -181,18 +164,6 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: 5f1752ed2092162f016c19510c28a8b9
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Button
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSGameManager
-  - hash:
-      serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -200,15 +171,9 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 4dee7969d7ec154fa13b40cd4e77de45
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: AccountDemoManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSLeaderboardManager
   - hash:
       serializedVersion: 2
       Hash: c42672c997f8be6b1aa86a927ebea785
@@ -229,6 +194,12 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: HuaweiMobileServices.dll
+    namespaceName: HuaweiMobileServices.Utils
+    className: HMSDispatcher
+  - hash:
+      serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -245,6 +216,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.2D.Animation.Runtime.dll
+    namespaceName: UnityEngine.U2D.Animation
+    className: BufferManager
   - hash:
       serializedVersion: 2
       Hash: a5781dc71a671b1ad2b38de19f24b71f
@@ -343,12 +320,6 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSAccountManager
-  - hash:
-      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -367,13 +338,13 @@ ScriptsOnlyBuild:
     className: CinemachinePixelPerfect
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: ef5c43f921427d03730f6ea4c848f07d
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RectMask2D
   - hash:
       serializedVersion: 2
-      Hash: be05d6256d91c0c4bbe909c3357a59d7
+      Hash: 5561fee3d7e9e983f72f3b22eaf4f4da
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -392,7 +363,7 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: CloudDBDemo
   - hash:
@@ -404,13 +375,13 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 3bb1b4bae6823a4524e793cdb8702970
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: IapDemoManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: GameDemoManager
   - hash:
@@ -419,12 +390,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Mask
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSAchievementsManager
   - hash:
       serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
@@ -440,7 +405,7 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 3293a84ba31c1adb817d0b645baa39fb
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: AuthServiceDemo
   - hash:
@@ -481,19 +446,13 @@ ScriptsOnlyBuild:
     className: SpriteShape
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HMSAppMessagingManager
-  - hash:
-      serializedVersion: 2
       Hash: dd7520b7d4e690e8c593273e7b9fbe80
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: TMP_TextEventCheck
   - hash:
       serializedVersion: 2
-      Hash: 5cc439bf63c0539d39588e69465ac2ab
+      Hash: fd68d84f33fad85aac38f2739c0ee270
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAsset
@@ -511,6 +470,12 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: HuaweiMobileServices.Core.dll
+    namespaceName: 
+    className: AppMessagingDemoManager
+  - hash:
+      serializedVersion: 2
       Hash: 8dc90e648ac06f43bdd31ac9fa8f4579
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -524,25 +489,13 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSIAPManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: RemoteConfigDemo
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HMSAnalyticsManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: NearbyDemoManager
   - hash:
@@ -550,13 +503,13 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: HMSAdsKitManager
+    className: MenuManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
-    className: MenuManager
+    className: CrashDemoManager
   - hash:
       serializedVersion: 2
       Hash: dc38c27f90ed9f5c03f2d6338eb092f5
@@ -575,12 +528,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HMSCrashManager
   - hash:
       serializedVersion: 2
       Hash: 3375c3d749f8f4cad889721b431bdc27
@@ -614,13 +561,13 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: HmsPlugin
     className: HMSSafeArea
   - hash:
       serializedVersion: 2
       Hash: 3deb19b3eaf6c420ac34c5dfeff1a25c
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: HmsPlugin
     className: AnalyticsDemoManager
   - hash:
@@ -637,12 +584,6 @@ ScriptsOnlyBuild:
     className: InputManager
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSPushKitManager
-  - hash:
-      serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -655,6 +596,12 @@ ScriptsOnlyBuild:
     className: ChatController
   - hash:
       serializedVersion: 2
+      Hash: 5f1752ed2092162f016c19510c28a8b9
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
+  - hash:
+      serializedVersion: 2
       Hash: f84d945e5e1ca985698660fc26e9657f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -662,7 +609,7 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: b5a762b92b14f40fca31f86fc2a3a46c
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: PushDemoManager
   - hash:
@@ -697,7 +644,7 @@ ScriptsOnlyBuild:
     className: SpriteSkin
   - hash:
       serializedVersion: 2
-      Hash: 783f593b9380cf72d0f7ebfd4a0d4bcd
+      Hash: f64fd37da5cb89243ec68b5026d70bb8
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: InputField
@@ -721,7 +668,7 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 344a8c2e106a0a4e098e91a52e0af063
+      Hash: 300fd99066f8c288e85f5e81ce65fe34
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_FontAsset
@@ -779,12 +726,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SafeArea
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSAuthServiceManager
   - hash:
       serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
@@ -865,7 +806,7 @@ ScriptsOnlyBuild:
     className: Benchmark04
   - hash:
       serializedVersion: 2
-      Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
+      Hash: 8e6ceabfd38a184413d69b7db56c89cc
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
@@ -895,7 +836,7 @@ ScriptsOnlyBuild:
     className: Benchmark02
   - hash:
       serializedVersion: 2
-      Hash: 6138eda349924f69579277098f340ec1
+      Hash: f1cf564aa1471941bcf23e8fd3b97086
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MazeGameManager
@@ -925,14 +866,14 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: d791aa6007fa3640be1164ea75bb087d
+      Hash: 800c50acba124432abb4cf0d47202e06
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 156dfb3dc274fbe9dabb5d0348ca8005
-    assemblyName: Assembly-CSharp.dll
+      Hash: 6590e99fbac162ef0273cfe627e448dd
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: HmsPlugin
     className: SettingsScriptableObject
   - hash:
@@ -955,18 +896,6 @@ ScriptsOnlyBuild:
     className: MenuManagerSettings
   - hash:
       serializedVersion: 2
-      Hash: 0404b3051ce4d88c6012a56bc1629697
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSNearbyServiceManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HMSRemoteConfigManager
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
@@ -979,7 +908,7 @@ ScriptsOnlyBuild:
     className: TextMeshProFloatingText
   - hash:
       serializedVersion: 2
-      Hash: 8cd1cbba27f3cb1717254f668e9e0d5a
+      Hash: 8f15c253902ff4eef507927669b9dc80
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshPro
@@ -992,7 +921,7 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: bad32a3290e9e45e05eb57f38e567331
-    assemblyName: Assembly-CSharp.dll
+    assemblyName: HuaweiMobileServices.Core.dll
     namespaceName: 
     className: AdsDemoManager
   - hash:
@@ -1016,15 +945,15 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSCloudDBManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: BaseInput
+  - hash:
+      serializedVersion: 2
+      Hash: c3235a343bebb54a63a0f86bdb5265fd
+    assemblyName: HuaweiMobileServices.Core.dll
+    namespaceName: 
+    className: HMSSplashAdPreview
   - hash:
       serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
@@ -1039,12 +968,6 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: HmsPlugin
-    className: HMSSaveGameManager
-  - hash:
-      serializedVersion: 2
       Hash: 5dea360fb0b147724ac344e6f399c2f3
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -1057,7 +980,7 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
-      Hash: 4ef0f7d42cdb13479386e1f049c315aa
+      Hash: 9726bc46e15d44429bd38fb013657f1e
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
     className: PlaymodeTestsController
@@ -1106,4 +1029,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/DTSE/1Unity/Unity Projects/Video Contect/videoContent27.apk
+  playerPath: C:/Users/aliha/Desktop/maze.apk

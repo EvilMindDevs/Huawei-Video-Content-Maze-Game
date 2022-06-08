@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace HmsPlugin
 {
-    public class HMSAuthServiceManager : HMSSingleton<HMSAuthServiceManager>
+    public class HMSAuthServiceManager : HMSManagerSingleton<HMSAuthServiceManager>
     {
         public Action<SignInResult> OnSignInSuccess { get; set; }
         public Action<HMSException> OnSignInFailed { get; set; }
@@ -22,9 +22,16 @@ namespace HmsPlugin
 
         AGConnectAuth _AGConnectAuth = null;
 
-        public override void Awake()
+        public HMSAuthServiceManager()
         {
-            base.Awake();
+            if (!HMSDispatcher.InstanceExists)
+                HMSDispatcher.CreateDispatcher();
+            HMSDispatcher.InvokeAsync(OnAwake);
+        }
+
+        private void OnAwake()
+        {
+            Debug.Log("[HMSAuthServiceManager]: AuthService OnAwake");
             _AGConnectAuth = AGConnectAuth.GetInstance();
         }
 
@@ -38,6 +45,7 @@ namespace HmsPlugin
                 })
                 .AddOnFailureListener((error) =>
                 {
+                    Debug.LogError("[HMSAuthServiceManager]: Sign in failed. CauseMessage: " + error.WrappedCauseMessage + ", ExceptionMessage: " + error.WrappedExceptionMessage);
                     OnSignInFailed?.Invoke(error);
                 });
         }
@@ -52,6 +60,7 @@ namespace HmsPlugin
                 })
                 .AddOnFailureListener((error) =>
                 {
+                    Debug.LogError("[HMSAuthServiceManager]: Sign in Anonymously failed. CauseMessage: " + error.WrappedCauseMessage + ", ExceptionMessage: " + error.WrappedExceptionMessage);
                     OnSignInFailed?.Invoke(error);
                 });
         }
@@ -82,6 +91,7 @@ namespace HmsPlugin
                     OnCreateUserSuccess?.Invoke(signInResult);
                 })
                 .AddOnFailureListener(error => {
+                    Debug.LogError("[HMSAuthServiceManager]: Create User failed. CauseMessage: " + error.WrappedCauseMessage + ", ExceptionMessage: " + error.WrappedExceptionMessage);
                     OnCreateUserFailed?.Invoke(error);
                 });
         }
@@ -95,6 +105,7 @@ namespace HmsPlugin
                     OnCreateUserSuccess?.Invoke(signInResult);
                 })
                 .AddOnFailureListener(error => {
+                    Debug.LogError("[HMSAuthServiceManager]: Create User failed. CauseMessage: " + error.WrappedCauseMessage + ", ExceptionMessage: " + error.WrappedExceptionMessage);
                     OnCreateUserFailed?.Invoke(error);
                 });
         }
@@ -107,7 +118,8 @@ namespace HmsPlugin
                     OnResetPasswordSuccess?.Invoke(true);
                 })
                 .AddOnFailureListener(error => {
-                    OnSignInFailed?.Invoke(error);
+                    Debug.LogError("[HMSAuthServiceManager]: Reset Password failed. CauseMessage: " + error.WrappedCauseMessage + ", ExceptionMessage: " + error.WrappedExceptionMessage);
+                    OnResetPasswordFailed?.Invoke(error);
                 });
         }
 
@@ -119,7 +131,8 @@ namespace HmsPlugin
                     OnResetPasswordSuccess?.Invoke(true);
                 })
                 .AddOnFailureListener(error => {
-                    OnSignInFailed?.Invoke(error);
+                    Debug.LogError("[HMSAuthServiceManager]: Reset Password failed. CauseMessage: " + error.WrappedCauseMessage + ", ExceptionMessage: " + error.WrappedExceptionMessage);
+                    OnResetPasswordFailed?.Invoke(error);
                 });
         }
     }

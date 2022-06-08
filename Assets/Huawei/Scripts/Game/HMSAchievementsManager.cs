@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HmsPlugin
 {
-    public class HMSAchievementsManager : HMSSingleton<HMSAchievementsManager>
+    public class HMSAchievementsManager : HMSManagerSingleton<HMSAchievementsManager>
     {
 
         public IAchievementsClient achievementsClient;
@@ -31,7 +31,7 @@ namespace HmsPlugin
 
         public void ShowAchievements()
         {
-            if (HMSAccountManager.Instance.HuaweiId != null)
+            if (HMSAccountKitManager.Instance.HuaweiId != null)
             {
                 IAchievementsClient achievementsClient = Games.GetAchievementsClient();
                 achievementsClient.ShowAchievementList(() =>
@@ -40,7 +40,7 @@ namespace HmsPlugin
                     OnShowAchievementsSuccess?.Invoke();
                 }, (exception) =>
                 {
-                    Debug.Log("[HMS GAMES:] ShowAchievements ERROR");
+                    Debug.LogError("[HMSAchievementsManager]: Show Achievements failed. CauseMessage: " + exception.WrappedCauseMessage + ", ExceptionMessage: " + exception.WrappedExceptionMessage);
                     OnShowAchievementsFailure?.Invoke(exception);
                 });
             }
@@ -55,11 +55,16 @@ namespace HmsPlugin
                 OnGetAchievementsListSuccess?.Invoke(result);
             }).AddOnFailureListener((exception) =>
             {
-                Debug.Log("[HMS GAMES] GetAchievementsList ERROR");
+                Debug.LogError("[HMSAchievementsManager]: GetAchievementsList failed. CauseMessage: " + exception.WrappedCauseMessage + ", ExceptionMessage: " + exception.WrappedExceptionMessage);
                 OnGetAchievementsListFailure?.Invoke(exception);
             });
         }
 
+        public void Visualize(string achievementId)
+        {
+            achievementsClient.Visualize(achievementId);
+            Debug.Log("[HMS GAMES] Visualize");
+        }
 
         public void RevealAchievement(string achievementId)
         {
@@ -71,9 +76,15 @@ namespace HmsPlugin
 
             }).AddOnFailureListener((exception) =>
             {
-                Debug.Log("[HMS GAMES] RevealAchievement ERROR");
+                Debug.LogError("[HMSAchievementsManager]: RevealAchievement failed. CauseMessage: " + exception.WrappedCauseMessage + ", ExceptionMessage: " + exception.WrappedExceptionMessage);
                 OnRevealAchievementFailure?.Invoke(exception);
             });
+        }
+
+        public void Grow(string achievementId, int stepIncrement)
+        {
+            achievementsClient.Grow(achievementId, stepIncrement);
+            Debug.Log("[HMS GAMES] Grow");
         }
 
         public void IncreaseStepAchievement(string achievementId, int stepIncrement)
@@ -86,9 +97,15 @@ namespace HmsPlugin
 
             }).AddOnFailureListener((exception) =>
             {
-                Debug.Log("[HMS GAMES] IncreaseStepAchievement ERROR");
+                Debug.LogError("[HMSAchievementsManager]: IncreaseStepAchievement failed. CauseMessage: " + exception.WrappedCauseMessage + ", ExceptionMessage: " + exception.WrappedExceptionMessage);
                 OnIncreaseStepAchievementFailure?.Invoke(exception);
             });
+        }
+
+        public void MakeSteps(string achievementId, int stepIncrement)
+        {
+            achievementsClient.MakeSteps(achievementId, stepIncrement);
+            Debug.Log("[HMS GAMES] MakeSteps");
         }
 
         public void SetStepAchievement(string achievementId, int stepsNum)
@@ -101,9 +118,15 @@ namespace HmsPlugin
 
             }).AddOnFailureListener((exception) =>
             {
-                Debug.Log("[HMS GAMES] SetStepAchievement ERROR");
+                Debug.LogError("[HMSAchievementsManager]: SetStepAchievement failed. CauseMessage: " + exception.WrappedCauseMessage + ", ExceptionMessage: " + exception.WrappedExceptionMessage);
                 OnSetStepAchievementFailure?.Invoke(exception);
             });
+        }
+
+        public void Reach(string achievementId)
+        {
+            achievementsClient.Reach(achievementId);
+            Debug.Log("[HMS GAMES] Reach");
         }
 
         public void UnlockAchievement(string achievementId)
@@ -116,7 +139,7 @@ namespace HmsPlugin
 
             }).AddOnFailureListener((exception) =>
             {
-                Debug.Log("[HMS GAMES] UnlockAchievements ERROR");
+                Debug.LogError("[HMSAchievementsManager]: UnlockAchievement failed. CauseMessage: " + exception.WrappedCauseMessage + ", ExceptionMessage: " + exception.WrappedExceptionMessage);
                 OnUnlockAchievementFailure?.Invoke(exception);
             });
         }

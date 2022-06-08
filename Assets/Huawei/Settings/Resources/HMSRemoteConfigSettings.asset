@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: HMSRemoteConfigSettings
   m_EditorClassIdentifier: 
   settings:
-    _keys:
-    - ApplyDefaultValues
-    - DeveloperMode
-    _values:
-    - False
-    - False
+    _keys: []
+    _values: []

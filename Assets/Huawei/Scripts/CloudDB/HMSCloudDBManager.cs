@@ -1,17 +1,20 @@
-﻿using HuaweiMobileServices.Base;
+﻿using HuaweiMobileServices.AuthService;
+using HuaweiMobileServices.Base;
 using HuaweiMobileServices.CloudDB;
+using HuaweiMobileServices.Common;
 using HuaweiMobileServices.Utils;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace HmsPlugin
 {
-    public class HMSCloudDBManager : HMSSingleton<HMSCloudDBManager>
+    public class HMSCloudDBManager : HMSManagerSingleton<HMSCloudDBManager>
     {
-        string TAG = "CloudDB Manager";
+        string TAG = "HMSCloudDBManager";
         AGConnectCloudDB mCloudDB = null;
         CloudDBZoneConfig mConfig = null;
         CloudDBZone mCloudDBZone = null;
+        ListenerHandler mRegister = null;
 
         public Action<CloudDBZone> OnOpenCloudDBZone2Success { get; set; }
         public Action<HMSException> OnOpenCloudDBZone2Failed { get; set; }
@@ -43,16 +46,19 @@ namespace HmsPlugin
         public Action<CloudDBZoneSnapshot<BookInfo>> OnExecuteQueryUnsyncedSuccess { get; set; }
         public Action<HMSException> OnExecuteQueryUnsyncedFailed { get; set; }
 
+        public Action<CloudDBZoneSnapshot<BookInfo>> OnCloudDBZoneSnapshot { get; set; }
+        public Action<AGConnectCloudDBException> OnCloudDBZoneSnapshotException { get; set; }
+
         public void Initialize()
         {
             AGConnectCloudDB.Initialize();
             Debug.Log($"[{TAG}]: Initialize()");
         }
 
-        public void GetInstance()
+        public void GetInstance(AGConnectInstance instance, AGConnectAuth auth)
         {
             if (mCloudDB == null)
-                mCloudDB = AGConnectCloudDB.GetInstance();
+                mCloudDB = AGConnectCloudDB.GetInstance(instance, auth);
             Debug.Log($"[{TAG}]: GetInstance() ");
         }
 
@@ -78,7 +84,7 @@ namespace HmsPlugin
             }
             catch (Exception e)
             {
-                Debug.Log($"[{TAG}]: CloudDBZoneConfig() exception " + e.Message);
+                Debug.LogError($"[{TAG}]: CloudDBZoneConfig() exception " + e.Message);
             }
 
             Debug.Log($"[{TAG}]: OpenCloudDBZone");
@@ -130,7 +136,7 @@ namespace HmsPlugin
 
         public void SetUserKey(string userKey, string userReKey)
         {
-            mCloudDB.SetUserKey(userKey, userReKey).AddOnSuccessListener(result => { }).AddOnFailureListener(error => { });
+            mCloudDB.SetUserKey(userKey, userReKey, false).AddOnSuccessListener(result => { }).AddOnFailureListener(error => { });
         }
 
         public void UpdateDataEncryptionKey()
@@ -390,16 +396,17 @@ namespace HmsPlugin
                 });
         }
 
-        public void SubscribeSnapshot(CloudDBZoneQuery cloudDBZoneQuery, CloudDBZoneQuery.CloudDBZoneQueryPolicy cloudDBZoneQueryPolicy, OnSnapshotListener listener)
+        public void SubscribeSnapshot(CloudDBZoneQuery cloudDBZoneQuery, CloudDBZoneQuery.CloudDBZoneQueryPolicy cloudDBZoneQueryPolicy)
         {
             if (mCloudDBZone == null)
             {
-                Debug.Log($"[{TAG}]: CloudDBZone is null, try re-open it");
+                Debug.LogError($"[{TAG}]: CloudDBZone is null, try re-open it");
                 return;
             }
 
-            mCloudDBZone.SubscribeSnapshot(cloudDBZoneQuery, cloudDBZoneQueryPolicy, listener);
+
+            mRegister = mCloudDBZone.SubscribeSnapshot(cloudDBZoneQuery, cloudDBZoneQueryPolicy, OnCloudDBZoneSnapshot, OnCloudDBZoneSnapshotException);
+            Debug.Log($"[{TAG}]: SubscribeSnaphot()");
         }
-                
     }
 }

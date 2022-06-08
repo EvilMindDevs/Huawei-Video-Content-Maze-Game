@@ -1,9 +1,11 @@
 ﻿
+using HmsPlugin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverMenu : SimpleMenu<GameOverMenu>
 {
@@ -33,27 +35,32 @@ public class GameOverMenu : SimpleMenu<GameOverMenu>
     public void OnContinueButtonClick()
     {
         continueClickCount++;
-         
+
+        HMSAdsKitManager.Instance.OnRewardAdCompleted = OnRewardAdCompleted;
+        HMSAdsKitManager.Instance.OnRewardAdClosed = OnRewardAdClosed;
         HMSAdsKitManager.Instance.ShowRewardedAd();
     }
 
-    private void OnApplicationPause(bool pause)
+    private void OnRewardAdClosed()
     {
-        Debug.Log("Pause : " + pause);
-        if (!pause)
+        Debug.Log("OnRewardAdClosed");
+        if (rewarded)
         {
-            if (rewarded)
-            {
-                Debug.Log("Rewarding user");
-                //PlayerController.Instance.RestartPlayerFromContinue();
-                Hide();
-                rewarded = false;
-            }
+            Debug.Log("Rewarding user");
+            //PlayerController.Instance.RestartPlayerFromContinue();
+            rewarded = false;
+            Hide();
         }
+    }
+
+    private void OnRewardAdCompleted()
+    {
+        Debug.Log("OnRewardAdCompleted");
+        rewarded = true;
     }
 
     public void OnTryAgainClick()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
