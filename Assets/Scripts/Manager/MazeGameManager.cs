@@ -77,11 +77,11 @@ public class MazeGameManager : MonoBehaviour
     }
     IEnumerator Start()
     {
-        HMSGameManager.Instance.SignInSuccess = OnLoginSuccess;
-        HMSGameManager.Instance.SignInFailure = OnSignInFailed;
+        HMSGameServiceManager.Instance.SignInSuccess = OnLoginSuccess;
+        HMSGameServiceManager.Instance.SignInFailure = OnSignInFailed;
 
         HMSIAPManager.Instance.OnObtainOwnedPurchasesSuccess = OwnedPurchases;
-        HMSIAPManager.Instance.ObtainOwnedPurchases();
+        HMSIAPManager.Instance.ObtainAllOwnedPurchases();
 
         // platformMaterial.color = colors[0];
         Application.targetFrameRate = 60;
@@ -245,7 +245,7 @@ public class MazeGameManager : MonoBehaviour
 
     private void CheckGameOver()
     {
-        if (CurrentTile.isBomb && CurrentTile.GetComponent<Image>().sprite != null)
+        if (CurrentTile.isBomb && CurrentTile.GetComponent<Image>().sprite != null && runningGame)
         {
             Debug.Log("Game Over");
             OnGameEnd();
@@ -280,6 +280,7 @@ public class MazeGameManager : MonoBehaviour
             PlayerPrefs.SetInt(PREF_BEST_SCORE, 0);
 
         InitializeBoard();
+        InitializeManagers();
 
     }
     public void OnGameStart()
@@ -291,6 +292,8 @@ public class MazeGameManager : MonoBehaviour
     public void OnGameEnd()
     {
         runningGame = false;
+        CurrentTile.enabled = false;
+
         OnGameEnded?.Invoke();
     }
     private int getBallLocation()
@@ -307,6 +310,15 @@ public class MazeGameManager : MonoBehaviour
     public void InitializeBoard()
     { 
         board.GetComponent<Board>().InitializeTiles(BoardConstant.currentLevel);
+    }
+    public void InitializeManagers()
+    {
+        HMSAdsKitManager.Instance.ShowBannerAd();
+        HMSGameServiceManager.Instance.CheckAppUpdate(true, false);
+        HMSIAPManager.Instance.CheckIapAvailability();
+
+        HMSLeaderboardManager.Instance.ToString();
+        HMSAchievementsManager.Instance.ToString();
     }
     public void ClearTileList()
     {
@@ -341,10 +353,10 @@ public class MazeGameManager : MonoBehaviour
      
         textMeshPro.text = "Level : " + (BoardConstant.currentLevel + 1);
         Score += 10;
-        HMSLeaderboardManager.Instance.SubmitScore(HMSLeaderboardConstants.Scores, Score);
+      HMSLeaderboardManager.Instance.SubmitScore(HMSLeaderboardConstants.Scores, Score);
 
          
-        HMSAchievementsManager.Instance.IncreaseStepAchievement(HMSAchievementConstants.Levels,1);
+       HMSAchievementsManager.Instance.IncreaseStepAchievement(HMSAchievementConstants.Levels,1);
 
         if (!isOwned)
         {

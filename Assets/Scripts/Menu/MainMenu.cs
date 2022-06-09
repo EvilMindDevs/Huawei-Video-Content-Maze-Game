@@ -39,9 +39,9 @@ public class MainMenu : SimpleMenu<MainMenu>
     {
         HMSIAPManager.Instance.OnBuyProductSuccess += OnBuyProductSuccess;
 
-        HMSIAPManager.Instance.BuyProduct(HMSIAPConstants.AdsRemove);
+       HMSIAPManager.Instance.BuyProduct(HMSIAPConstants.AdsRemove);
 
-        MainMenu.Hide(); 
+       // MainMenu.Hide(); 
 
     }
 
@@ -63,10 +63,10 @@ public class MainMenu : SimpleMenu<MainMenu>
     public void QuitGame()
     {
        Debug.Log("QuitGame");
-       // Application.Quit();
-       BoardConstant.currentLevel++;
+       Application.Quit();
+       /*BoardConstant.currentLevel++;
        MazeGameManager.Instance.ClearTileList();
-       MazeGameManager.Instance.InitializeBoard();
+       MazeGameManager.Instance.InitializeBoard();*/
     }
 
     public void OnLeaderboardsClick()
@@ -76,8 +76,9 @@ public class MainMenu : SimpleMenu<MainMenu>
     }
 
     public void OnAchievementsClick()
-    { 
-        HMSAchievementsManager.Instance.ShowAchievements();
+    {
+       //For testable achivements you need to add your account to sandbox
+       HMSAchievementsManager.Instance.ShowAchievements();
     }
  
 

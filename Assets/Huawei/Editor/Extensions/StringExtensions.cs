@@ -88,5 +88,35 @@ namespace HmsPlugin
 
             return value;
         }
+
+        public static string RemoveAfter(this string value, char toRemove)
+        {
+            int index = 0;
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] == toRemove)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            index = index == 0 ? value.Length : index;
+            return value.Substring(0, index);
+        }
+
+        public static string ToCamelCase(this string s)
+        {
+            var x = s.Replace("_", "");
+            if (x.Length == 0) return "null";
+            x = Regex.Replace(x, "([A-Z])([A-Z]+)($|[A-Z])",
+                m => m.Groups[1].Value + m.Groups[2].Value.ToLower() + m.Groups[3].Value);
+            return char.ToLower(x[0]) + x.Substring(1);
+        }
+
+        public static string ToPascalCase(this string s)
+        {
+            var x = ToCamelCase(s);
+            return char.ToUpper(x[0]) + x.Substring(1);
+        }
     }
 }

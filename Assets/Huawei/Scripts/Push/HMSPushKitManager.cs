@@ -3,27 +3,53 @@ using HuaweiMobileServices.Id;
 using HuaweiMobileServices.Push;
 using HuaweiMobileServices.Utils;
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace HmsPlugin
 {
-    public class HMSPushKitManager : HMSSingleton<HMSPushKitManager>, IPushListener
+    public class HMSPushKitManager : HMSManagerSingleton<HMSPushKitManager>, IPushListener
     {
         public Action<string> OnTokenSuccess { get; set; }
         public Action<Exception> OnTokenFailure { get; set; }
-        public Action<RemoteMessage> OnMessageReceivedSuccess { get; set; }
         public Action<string, Bundle> OnTokenBundleSuccess { get; set; }
         public Action<Exception, Bundle> OnTokenBundleFailure { get; set; }
         public Action<string> OnMessageSentSuccess { get; set; }
-        public Action<string, Exception> OnMessageDeliveredSuccess { get; set; }
         public Action<string, Exception> OnSendFailure { get; set; }
+        public Action<string, Exception> OnMessageDeliveredSuccess { get; set; }
+        public Action<RemoteMessage> OnMessageReceivedSuccess { get; set; }
+        public Action<NotificationData> OnNotificationMessage { get; set; }
+        public Action<NotificationData> NotificationMessageOnStart { get; set; }
 
+        public NotificationData notificationDataOnStart;
 
-        // Start is called before the first frame update
-        void Start()
+        public HMSPushKitManager()
         {
+            Debug.Log($"[HMS] : HMSPushKitManager Constructor");
+            if (!HMSDispatcher.InstanceExists)
+                HMSDispatcher.CreateDispatcher();
+            HMSDispatcher.InvokeAsync(OnAwake);
+        }
+
+        private void OnAwake()
+        {
+            Debug.Log($"[HMS] : HMSPushKitManager OnAwake");
             PushManager.Listener = this;
+            notificationDataOnStart = PushManager.NotificationDataOnStart;
+        }
+
+        public void Init() 
+        {
+            if (notificationDataOnStart.NotifyId != -1)
+            {
+                NotificationMessageOnStart?.Invoke(notificationDataOnStart);
+            }
+            PushManager.RegisterOnNotificationMessage((data) =>
+            {
+                OnNotificationMessage?.Invoke(data);
+            });
+
             var token = PushManager.Token;
             Debug.Log($"[HMS] Push token from GetToken is {token}");
             if (token != null)
@@ -48,8 +74,11 @@ namespace HmsPlugin
             OnTokenFailure?.Invoke(e);
         }
 
+        // This method only gets triggered if Data Message is sent by Push Kit Server/AGC.
         public void OnMessageReceived(RemoteMessage remoteMessage)
         {
+            Debug.Log("[HMSPushKit] Data Message received");
+            Debug.Log("Data: " + remoteMessage.Data);
             OnMessageReceivedSuccess?.Invoke(remoteMessage);
         }
 

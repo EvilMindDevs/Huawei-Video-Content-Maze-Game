@@ -1,31 +1,72 @@
-﻿using HuaweiMobileServices.Base;
+﻿using HmsPlugin;
+using HuaweiMobileServices.Base;
 using HuaweiMobileServices.Id;
 using HuaweiMobileServices.Push;
 using HuaweiMobileServices.Utils;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PushDemoManager : MonoBehaviour, IPushListener
+public class PushDemoManager : MonoBehaviour
 {
     private string pushToken;
     [SerializeField]
     private Text remoteMessageText, tokenText;
 
-    void Awake()
+   //private NotificationData notificationDataOnStart;
+
+    void Start()
     {
-        PushManager.Listener = this;
-        pushToken = PushManager.Token;
-        Debug.Log($"[HMS] Push token from GetToken is {pushToken}");
-        tokenText.text = "Push Token: " + pushToken;
+        /*
+         * When using multiple kits, we recommend initializing the push kit with the coroutine.
+         */
+        Debug.Log("[HMS] Push Start");
+        StartCoroutine(LateStart(0f));
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        HMSPushKitManager.Instance.OnTokenSuccess = OnNewToken;
+        HMSPushKitManager.Instance.OnTokenFailure = OnTokenError;
+        HMSPushKitManager.Instance.OnTokenBundleSuccess = OnNewToken;
+        HMSPushKitManager.Instance.OnTokenBundleFailure = OnTokenError;
+        HMSPushKitManager.Instance.OnMessageSentSuccess = OnMessageSent;
+        HMSPushKitManager.Instance.OnSendFailure = OnSendError;
+        HMSPushKitManager.Instance.OnMessageDeliveredSuccess = OnMessageDelivered;
+        HMSPushKitManager.Instance.OnMessageReceivedSuccess = OnMessageReceived;
+        HMSPushKitManager.Instance.OnNotificationMessage = OnNotificationMessage;
+        HMSPushKitManager.Instance.NotificationMessageOnStart = NotificationMessageOnStart;
+        HMSPushKitManager.Instance.Init();
+    }
+
+    private void OnNotificationMessage(NotificationData data)
+    {
+        Debug.Log("[HMSPushDemo] CmdType: " + data.CmdType);
+        Debug.Log("[HMSPushDemo] MsgId: " + data.MsgId);
+        Debug.Log("[HMSPushDemo] NotifyId: " + data.NotifyId);
+        Debug.Log("[HMSPushDemo] KeyValueJSON: " + data.KeyValueJSON);
+    }
+
+    private void NotificationMessageOnStart(NotificationData data)
+    {
+        Debug.Log("[HMSPushDemo] CmdType: " + data.CmdType);
+        Debug.Log("[HMSPushDemo] MsgId: " + data.MsgId);
+        Debug.Log("[HMSPushDemo] NotifyId: " + data.NotifyId);
+        Debug.Log("[HMSPushDemo] KeyValueJSON: " + data.KeyValueJSON);
+        /* TODO: Make your own logic here
+         * notificationDataOnStart = data;
+         */
     }
 
     public void OnNewToken(string token)
     {
-        Debug.Log($"[HMS] Push token from OnNewToken is {pushToken}");
-        if (pushToken == null)
+        Debug.Log($"[HMS] Push token from OnNewToken is {token}");
+        if (token != "")
         {
             pushToken = token;
+            tokenText.text = "Push Token: " + pushToken;
         }
     }
 
@@ -46,10 +87,11 @@ public class PushDemoManager : MonoBehaviour, IPushListener
 
     public void OnNewToken(string token, Bundle bundle)
     {
-        Debug.Log($"[HMS] Push token from OnNewToken is {pushToken}");
-        if (pushToken == null)
+        Debug.Log($"[HMS] Push token from OnNewToken is {token}");
+        if (token != "")
         {
             pushToken = token;
+            tokenText.text = "Push Token: " + pushToken;
         }
     }
 
